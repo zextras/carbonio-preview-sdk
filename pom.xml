@@ -1,0 +1,80 @@
+<!--
+SPDX-FileCopyrightText: 2022 Zextras <https://www.zextras.com>
+
+SPDX-License-Identifier: AGPL-3.0-only
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.zextras.carbonio.preview</groupId>
+  <artifactId>carbonio-preview-ce-sdk</artifactId>
+  <version>0.2.2</version>
+  <packaging>jar</packaging>
+  <name>carbonio-preview-ce-sdk</name>
+
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${apache-httpclient.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${apache-common.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
+      <version>${vavr.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>4.3.1</version>
+    </dependency>
+
+  </dependencies>
+
+  <distributionManagement>
+    <repository>
+      <id>artifactory</id>
+      <name>Zextras releases</name>
+      <url>https://zextras.jfrog.io/artifactory/public-maven-repo</url>
+    </repository>
+  </distributionManagement>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+
+    <apache-httpclient.version>4.5.13</apache-httpclient.version>
+    <jackson.version>2.13.1</jackson.version>
+    <apache-common.version>2.11.0</apache-common.version>
+    <vavr.version>0.10.4</vavr.version>
+  </properties>
+
+</project>
