@@ -33,7 +33,7 @@ pipeline {
         stage('Publish version') {
             when {
                 anyOf {
-                   branch 'master'
+                   branch 'develop'
                 }
             }
             steps {
