@@ -59,8 +59,8 @@ public class Query {
   public Optional<String> getType() {
     return Optional.ofNullable(
       type == null
-      ? null
-      : type.toString().toLowerCase()
+        ? null
+        : type.toString().toLowerCase()
     );
   }
 
@@ -71,24 +71,24 @@ public class Query {
   public Optional<String> getShape() {
     return Optional.ofNullable(
       shape == null
-      ? null
-      : shape.toString().toLowerCase()
+        ? null
+        : shape.toString().toLowerCase()
     );
   }
 
   public Optional<String> getQuality() {
     return Optional.ofNullable(
       quality == null
-      ? null
-      : quality.toString().toLowerCase()
+        ? null
+        : quality.toString().toLowerCase()
     );
   }
 
   public Optional<String> getOutputFormat() {
     return Optional.ofNullable(
       outputFormat == null
-      ? null
-      : outputFormat.toString().toLowerCase()
+        ? null
+        : outputFormat.toString().toLowerCase()
     );
   }
 
@@ -113,7 +113,7 @@ public class Query {
     baseUriBuilder.append('/');
     getNodeId().ifPresent(n -> baseUriBuilder.append(n).append('/'));
     getVersion().ifPresent(v -> baseUriBuilder.append(v).append('/'));
-    getPreviewArea().ifPresent(a -> baseUriBuilder.append(a).append('/'));
+    getPreviewArea().ifPresent(area -> baseUriBuilder.append(area).append('/'));
 
     // Optional parameters setup
 
@@ -122,9 +122,9 @@ public class Query {
     getShape().ifPresent(s -> queryParameter.append("shape=").append(s).append("&"));
     getQuality().ifPresent(q -> queryParameter.append("quality=").append(q).append("&"));
     getOutputFormat().ifPresent(f -> queryParameter.append("output_format=").append(f).append("&"));
-    getCrop().ifPresent(q -> queryParameter.append("crop=").append(q).append("&"));
-    getFirstPage().ifPresent(n -> queryParameter.append("first_page=").append(n).append("&"));
-    getLastPage().ifPresent(n -> queryParameter.append("last_page=").append(n).append("&"));
+    getCrop().ifPresent(c -> queryParameter.append("crop=").append(c).append("&"));
+    getFirstPage().ifPresent(f -> queryParameter.append("first_page=").append(f).append("&"));
+    getLastPage().ifPresent(l -> queryParameter.append("last_page=").append(l).append("&"));
 
     getType().ifPresent(t -> queryParameter.append("service_type=").append(t));
     int queryLength = queryParameter.length();
@@ -133,8 +133,8 @@ public class Query {
     }
     return
       (queryParameter.length() <= 0)
-      ? baseUri
-      : baseUri + '?' + queryParameter;
+        ? baseUri
+        : baseUri + '?' + queryParameter;
   }
 
 

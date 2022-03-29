@@ -9,10 +9,10 @@ SPDX-License-Identifier: AGPL-3.0-only
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.zextras.carbonio.preview</groupId>
-  <artifactId>carbonio-preview-ce-sdk</artifactId>
-  <version>0.2.2</version>
+  <artifactId>carbonio-preview-sdk</artifactId>
+  <version>0.2.3</version>
   <packaging>jar</packaging>
-  <name>carbonio-preview-ce-sdk</name>
+  <name>carbonio-preview-sdk</name>
 
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>

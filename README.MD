@@ -26,7 +26,7 @@ Official sdk for Preview backend service for Zextras Carbonio
 
 <dependency>
   <groupId>com.zextras.carbonio.preview</groupId>
-  <artifactId>carbonio-preview-ce-sdk</artifactId>
+  <artifactId>carbonio-preview-sdk</artifactId>
   <version>${preview-sdk.version}</version>
 </dependency>
 ```
