@@ -31,11 +31,11 @@ public class PreviewClient {
 
   private final String previewEndpoint;
   private final String previewUrl;
-  private final String imageEndpoint       = "/image";
-  private final String pdfEndpoint         = "/pdf";
+  private final String imageEndpoint       = "image";
+  private final String pdfEndpoint         = "pdf";
   private final String healthReadyEndpoint = "/health/ready/";
-  private final String thumbnailPath       = "/thumbnail";
-  private final String accountHeader       = "AccountId";
+  private final String thumbnailPathParam = "thumbnail";
+  private final String fileOwnerIdHeader  = "FileOwnerId";
 
   // UTILITY
 
@@ -56,33 +56,33 @@ public class PreviewClient {
     return new PreviewClient(protocol + "://" + domain + ":" + port);
   }
 
-  private String getThumbnailPath(Query query) {
+  private String createPathForThumbnail(Query query) {
     String toModifyRequestUri = query.toString();
     // 1 because an empty query contains '/'
     if (toModifyRequestUri.chars().filter(ch -> ch == '/').count() > 1) {
       int index = toModifyRequestUri.indexOf('?');
       if (index == -1) {
-        return toModifyRequestUri + thumbnailPath + "/";
+        return toModifyRequestUri + "/" + thumbnailPathParam + "/";
       } else {
         return toModifyRequestUri.substring(0, index - 1)
-          + thumbnailPath
+          + "/" + thumbnailPathParam
           + toModifyRequestUri.substring(index - 1);
       }
     } else {
-      return thumbnailPath + '/';
+      return "/" + thumbnailPathParam + "/";
     }
   }
 
   // IMAGE
 
   public Try<BlobResponse> getPreviewOfImage(Query query) {
-    return sendGetToPreviewService(query.toString(), imageEndpoint, query.getAccountId().get());
+    return sendGetToPreviewService(query.toString(), imageEndpoint, query.getFileOwnerId().get());
   }
 
 
   public Try<BlobResponse> getThumbnailOfImage(Query query) {
     return sendGetToPreviewService(
-      getThumbnailPath(query), imageEndpoint, query.getAccountId().get()
+      createPathForThumbnail(query), imageEndpoint, query.getFileOwnerId().get()
     );
   }
 
@@ -92,7 +92,7 @@ public class PreviewClient {
     Query query,
     String fileName
   ) {
-    return postRequestToPreviewService(blob, fileName, query.toString(), imageEndpoint);
+    return sendPostToPreviewService(blob, fileName, query.toString(), imageEndpoint);
   }
 
   public Try<BlobResponse> postThumbnailOfImage(
@@ -100,19 +100,19 @@ public class PreviewClient {
     Query query,
     String fileName
   ) {
-    return postRequestToPreviewService(blob, fileName, getThumbnailPath(query), imageEndpoint);
+    return sendPostToPreviewService(blob, fileName, createPathForThumbnail(query), imageEndpoint);
   }
 
   //PDF
 
   public Try<BlobResponse> getPreviewOfPdf(Query query) {
-    return sendGetToPreviewService(query.toString(), pdfEndpoint, query.getAccountId().get());
+    return sendGetToPreviewService(query.toString(), pdfEndpoint, query.getFileOwnerId().get());
   }
 
 
   public Try<BlobResponse> getThumbnailOfPdf(Query query) {
     return sendGetToPreviewService(
-      getThumbnailPath(query), pdfEndpoint, query.getAccountId().get()
+      createPathForThumbnail(query), pdfEndpoint, query.getFileOwnerId().get()
     );
   }
 
@@ -121,7 +121,7 @@ public class PreviewClient {
     Query query,
     String fileName
   ) {
-    return postRequestToPreviewService(blob, fileName, getThumbnailPath(query), pdfEndpoint);
+    return sendPostToPreviewService(blob, fileName, createPathForThumbnail(query), pdfEndpoint);
   }
 
   public Try<BlobResponse> postPreviewOfPdf(
@@ -129,19 +129,19 @@ public class PreviewClient {
     Query query,
     String fileName
   ) {
-    return postRequestToPreviewService(blob, fileName, query.toString(), pdfEndpoint);
+    return sendPostToPreviewService(blob, fileName, query.toString(), pdfEndpoint);
   }
 
   // API CALL
 
-  private Try<BlobResponse> postRequestToPreviewService(
+  private Try<BlobResponse> sendPostToPreviewService(
     InputStream blob,
     String fileName,
     String query,
     String endpoint
   ) {
     String requestUri = MessageFormat.format(
-      "{0}{1}{2}",
+      "{0}/{1}{2}",
       previewEndpoint, endpoint,
       query
     );
@@ -162,12 +162,12 @@ public class PreviewClient {
     String accountHeaderValue
   ) {
     String requestUri = MessageFormat.format(
-      "{0}{1}{2}",
+      "{0}/{1}{2}",
       previewEndpoint, endpoint,
       query
     );
     HttpGet request = new HttpGet(requestUri);
-    request.setHeader(accountHeader, accountHeaderValue);
+    request.setHeader(fileOwnerIdHeader, accountHeaderValue);
     return sendRequestToPreviewService(request);
   }
 
