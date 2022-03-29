@@ -34,8 +34,8 @@ public class PreviewClient {
   private final String imageEndpoint       = "image";
   private final String pdfEndpoint         = "pdf";
   private final String healthReadyEndpoint = "/health/ready/";
-  private final String thumbnailPathParam  = "thumbnail";
-  private final String nodeOwnerIdHeader   = "NodeOwnerId";
+  private final String thumbnailPathParam = "thumbnail";
+  private final String fileOwnerIdHeader  = "FileOwnerId";
 
   // UTILITY
 
@@ -76,13 +76,13 @@ public class PreviewClient {
   // IMAGE
 
   public Try<BlobResponse> getPreviewOfImage(Query query) {
-    return sendGetToPreviewService(query.toString(), imageEndpoint, query.getNodeOwnerId().get());
+    return sendGetToPreviewService(query.toString(), imageEndpoint, query.getFileOwnerId().get());
   }
 
 
   public Try<BlobResponse> getThumbnailOfImage(Query query) {
     return sendGetToPreviewService(
-      createPathForThumbnail(query), imageEndpoint, query.getNodeOwnerId().get()
+      createPathForThumbnail(query), imageEndpoint, query.getFileOwnerId().get()
     );
   }
 
@@ -106,13 +106,13 @@ public class PreviewClient {
   //PDF
 
   public Try<BlobResponse> getPreviewOfPdf(Query query) {
-    return sendGetToPreviewService(query.toString(), pdfEndpoint, query.getNodeOwnerId().get());
+    return sendGetToPreviewService(query.toString(), pdfEndpoint, query.getFileOwnerId().get());
   }
 
 
   public Try<BlobResponse> getThumbnailOfPdf(Query query) {
     return sendGetToPreviewService(
-      createPathForThumbnail(query), pdfEndpoint, query.getNodeOwnerId().get()
+      createPathForThumbnail(query), pdfEndpoint, query.getFileOwnerId().get()
     );
   }
 
@@ -167,7 +167,7 @@ public class PreviewClient {
       query
     );
     HttpGet request = new HttpGet(requestUri);
-    request.setHeader(nodeOwnerIdHeader, accountHeaderValue);
+    request.setHeader(fileOwnerIdHeader, accountHeaderValue);
     return sendRequestToPreviewService(request);
   }
 

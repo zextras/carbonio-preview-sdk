@@ -14,9 +14,9 @@ import java.util.Optional;
 public class Query {
 
   // Required if using non ce version
-  private final String      nodeOwnerId;
+  private final String fileOwnerId;
   //Required if using a get
-  private final String      nodeId;
+  private final String nodeId;
   private final Integer     version;
   private final ServiceType type;
   //Image required always
@@ -32,7 +32,7 @@ public class Query {
 
 
   private Query(QueryBuilder builder) {
-    this.nodeOwnerId = builder.nodeOwnerId;
+    this.fileOwnerId = builder.fileOwnerId;
     this.nodeId = builder.nodeId;
     this.version = builder.version;
     this.type = builder.type;
@@ -45,8 +45,8 @@ public class Query {
     this.lastPage = builder.lastPage;
   }
 
-  public Optional<String> getNodeOwnerId() {
-    return Optional.ofNullable(nodeOwnerId);
+  public Optional<String> getFileOwnerId() {
+    return Optional.ofNullable(fileOwnerId);
   }
 
   public Optional<String> getNodeId() {
@@ -142,8 +142,8 @@ public class Query {
   public static class QueryBuilder {
 
     //Required if using a get
-    private String      nodeOwnerId;
-    private String      nodeId;
+    private String fileOwnerId;
+    private String nodeId;
     private Integer     version;
     private ServiceType type;
     //Image required always
@@ -158,12 +158,12 @@ public class Query {
     private Integer     lastPage;
 
     public QueryBuilder(
-      String nodeOwnerId,
+      String fileOwnerId,
       String nodeId,
       int version,
       ServiceType type
     ) {
-      this.nodeOwnerId = nodeOwnerId;
+      this.fileOwnerId = fileOwnerId;
       this.nodeId = nodeId;
       this.version = version;
       this.type = type;
@@ -197,8 +197,8 @@ public class Query {
       return this;
     }
 
-    public QueryBuilder setNodeOwnerId(String nodeOwnerId) {
-      this.nodeOwnerId = nodeOwnerId;
+    public QueryBuilder setFileOwnerId(String fileOwnerId) {
+      this.fileOwnerId = fileOwnerId;
       return this;
     }
 
