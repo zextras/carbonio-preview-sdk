@@ -13,8 +13,9 @@ import java.util.Optional;
 
 public class Query {
 
+  // Required if using non ce version
+  private final String      nodeOwnerId;
   //Required if using a get
-  private final String      accountId;
   private final String      nodeId;
   private final Integer     version;
   private final ServiceType type;
@@ -31,7 +32,7 @@ public class Query {
 
 
   private Query(QueryBuilder builder) {
-    this.accountId = builder.accountId;
+    this.nodeOwnerId = builder.nodeOwnerId;
     this.nodeId = builder.nodeId;
     this.version = builder.version;
     this.type = builder.type;
@@ -44,8 +45,8 @@ public class Query {
     this.lastPage = builder.lastPage;
   }
 
-  public Optional<String> getAccountId() {
-    return Optional.ofNullable(accountId);
+  public Optional<String> getNodeOwnerId() {
+    return Optional.ofNullable(nodeOwnerId);
   }
 
   public Optional<String> getNodeId() {
@@ -141,7 +142,7 @@ public class Query {
   public static class QueryBuilder {
 
     //Required if using a get
-    private String      accountId;
+    private String      nodeOwnerId;
     private String      nodeId;
     private Integer     version;
     private ServiceType type;
@@ -157,12 +158,12 @@ public class Query {
     private Integer     lastPage;
 
     public QueryBuilder(
-      String accountId,
+      String nodeOwnerId,
       String nodeId,
       int version,
       ServiceType type
     ) {
-      this.accountId = accountId;
+      this.nodeOwnerId = nodeOwnerId;
       this.nodeId = nodeId;
       this.version = version;
       this.type = type;
@@ -196,8 +197,8 @@ public class Query {
       return this;
     }
 
-    public QueryBuilder setAccountId(String accountId) {
-      this.accountId = accountId;
+    public QueryBuilder setNodeOwnerId(String nodeOwnerId) {
+      this.nodeOwnerId = nodeOwnerId;
       return this;
     }
 
