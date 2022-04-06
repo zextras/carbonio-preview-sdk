@@ -33,9 +33,10 @@ public class PreviewClient {
   private final String previewUrl;
   private final String imageEndpoint       = "image";
   private final String pdfEndpoint         = "pdf";
+  private final String documentEndpoint    = "document";
   private final String healthReadyEndpoint = "/health/ready/";
-  private final String thumbnailPathParam = "thumbnail";
-  private final String fileOwnerIdHeader  = "FileOwnerId";
+  private final String thumbnailPathParam  = "thumbnail";
+  private final String fileOwnerIdHeader   = "FileOwnerId";
 
   // UTILITY
 
@@ -64,8 +65,7 @@ public class PreviewClient {
       if (index == -1) {
         return toModifyRequestUri + "/" + thumbnailPathParam + "/";
       } else {
-        return toModifyRequestUri.substring(0, index - 1)
-          + "/" + thumbnailPathParam
+        return toModifyRequestUri.substring(0, index - 1) + "/" + thumbnailPathParam
           + toModifyRequestUri.substring(index - 1);
       }
     } else {
@@ -132,6 +132,39 @@ public class PreviewClient {
     return sendPostToPreviewService(blob, fileName, query.toString(), pdfEndpoint);
   }
 
+  //DOCUMENT
+
+  public Try<BlobResponse> getPreviewOfDocument(Query query) {
+    return sendGetToPreviewService(
+      query.toString(), documentEndpoint, query.getFileOwnerId().get()
+    );
+  }
+
+
+  public Try<BlobResponse> getThumbnailOfDocument(Query query) {
+    return sendGetToPreviewService(
+      createPathForThumbnail(query), documentEndpoint, query.getFileOwnerId().get()
+    );
+  }
+
+  public Try<BlobResponse> postThumbnailOfDocument(
+    InputStream blob,
+    Query query,
+    String fileName
+  ) {
+    return sendPostToPreviewService(
+      blob, fileName, createPathForThumbnail(query), documentEndpoint
+    );
+  }
+
+  public Try<BlobResponse> postPreviewOfDocument(
+    InputStream blob,
+    Query query,
+    String fileName
+  ) {
+    return sendPostToPreviewService(blob, fileName, query.toString(), documentEndpoint);
+  }
+
   // API CALL
 
   private Try<BlobResponse> sendPostToPreviewService(
@@ -142,14 +175,12 @@ public class PreviewClient {
   ) {
     String requestUri = MessageFormat.format(
       "{0}/{1}{2}",
-      previewEndpoint, endpoint,
-      query
+      previewEndpoint, endpoint, query
     );
     HttpPost httpPost = new HttpPost(requestUri);
 
     MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-    builder.addBinaryBody(
-      "file", blob, ContentType.APPLICATION_OCTET_STREAM, fileName);
+    builder.addBinaryBody("file", blob, ContentType.APPLICATION_OCTET_STREAM, fileName);
     HttpEntity multipart = builder.build();
     httpPost.setEntity(multipart);
     return sendRequestToPreviewService(httpPost);
@@ -163,8 +194,7 @@ public class PreviewClient {
   ) {
     String requestUri = MessageFormat.format(
       "{0}/{1}{2}",
-      previewEndpoint, endpoint,
-      query
+      previewEndpoint, endpoint, query
     );
     HttpGet request = new HttpGet(requestUri);
     request.setHeader(fileOwnerIdHeader, accountHeaderValue);
@@ -199,7 +229,8 @@ public class PreviewClient {
     CloseableHttpClient httpClient = HttpClients.createMinimal();
 
     String requestUri = MessageFormat.format(
-      "{0}{1}", previewUrl, healthReadyEndpoint
+      "{0}{1}",
+      previewUrl, healthReadyEndpoint
     );
     HttpGet request = new HttpGet(requestUri);
 
