@@ -105,7 +105,7 @@ public class PreviewClient {
   /**
    * Allows to request the processing of an IMAGE to the PREVIEW endpoint using an HTTP GET
    *
-   * @param query is a {@link Query}that specifies the query parameters for the GET.
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
    * ok.
@@ -118,7 +118,7 @@ public class PreviewClient {
   /**
    * Allows to request the processing of an IMAGE to the THUMBNAIL endpoint using an HTTP GET
    *
-   * @param query is a {@link Query}that specifies the query parameters for the GET.
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
    * ok.
@@ -134,8 +134,8 @@ public class PreviewClient {
    * Allows to send an IMAGE to the PREVIEW endpoint using an HTTP POST and be processed
    *
    * @param blob is a {@link InputStream} that contains the image.
-   * @param query is a {@link Query}that specifies the query parameters
-   * @param fileName the name of the file.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
    * ok.
@@ -152,8 +152,8 @@ public class PreviewClient {
    * Allows to send an IMAGE to the THUMBNAIL endpoint using an HTTP POST and be processed
    *
    * @param blob is a {@link InputStream} that contains the image.
-   * @param query is a {@link Query}that specifies the query parameters
-   * @param fileName the name of the file.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
    * ok.
@@ -171,7 +171,7 @@ public class PreviewClient {
   /**
    * Allows to request the processing of a PDF to the PREVIEW endpoint using an HTTP GET
    *
-   * @param query is a {@link Query}that specifies the query parameters for the GET.
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the pdf content if everything went
    * ok.
@@ -184,7 +184,7 @@ public class PreviewClient {
   /**
    * Allows to request the processing of a PDF to the THUMBNAIL endpoint using an HTTP GET
    *
-   * @param query is a {@link Query}that specifies the query parameters for the GET.
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
    * ok.
@@ -199,8 +199,8 @@ public class PreviewClient {
    * Allows to send a PDF to the THUMBNAIL endpoint using an HTTP POST and be processed
    *
    * @param blob is a {@link InputStream} that contains the pdf.
-   * @param query is a {@link Query}that specifies the query parameters
-   * @param fileName the name of the file.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
    * ok.
@@ -217,8 +217,8 @@ public class PreviewClient {
    * Allows to send a PDF to the PREVIEW endpoint using an HTTP POST and be processed
    *
    * @param blob is a {@link InputStream} that contains the pdf.
-   * @param query is a {@link Query}that specifies the query parameters
-   * @param fileName the name of the file.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the pdf content if everything went
    * ok.
@@ -236,7 +236,7 @@ public class PreviewClient {
   /**
    * Allows to request the processing of a DOCUMENT to the PREVIEW endpoint using an HTTP GET
    *
-   * @param query is a {@link Query}that specifies the query parameters for the GET.
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the pdf content if everything went
    * ok.
@@ -250,7 +250,7 @@ public class PreviewClient {
   /**
    * Allows to request the processing of a DOCUMENT to the THUMBNAIL endpoint using an HTTP GET
    *
-   * @param query is a {@link Query}that specifies the query parameters for the GET.
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
    * ok.
@@ -266,8 +266,8 @@ public class PreviewClient {
    * Allows to send a DOCUMENT to the THUMBNAIL endpoint using an HTTP POST and be processed
    *
    * @param blob is a {@link InputStream} that contains the document.
-   * @param query is a {@link Query}that specifies the query parameters
-   * @param fileName the name of the file.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
    * ok.
@@ -286,8 +286,8 @@ public class PreviewClient {
    * Allows to send a DOCUMENT to the PREVIEW endpoint using an HTTP POST and be processed
    *
    * @param blob is a {@link InputStream} that contains the document.
-   * @param query is a {@link Query}that specifies the query parameters
-   * @param fileName the name of the file.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
    *
    * @return a {@link Try} of {@link BlobResponse} representing the pdf content if everything went
    * ok.

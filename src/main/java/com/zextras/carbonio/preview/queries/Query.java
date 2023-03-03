@@ -14,7 +14,6 @@ import java.util.Optional;
 /**
  * An object of this class can only be instantiated using the builder pattern using {@link QueryBuilder}.
  * It is used to specify query parameters for the preview API calls
- *
  */
 public class Query {
 
