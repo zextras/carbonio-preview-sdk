@@ -11,6 +11,10 @@ import com.zextras.carbonio.preview.queries.enums.Shape;
 
 import java.util.Optional;
 
+/**
+ * An object of this class can only be instantiated using the builder pattern using {@link QueryBuilder}.
+ * It is used to specify query parameters for the preview API calls
+ */
 public class Query {
 
   // Required if using non ce version
@@ -105,6 +109,12 @@ public class Query {
     return Optional.ofNullable(firstPage);
   }
 
+  /**
+   * Creates a valid String from the Query object. It formats the various field of the object
+   * Into a valid HTTP url path.
+   * Example of a valid toString for an image query:
+   * <code>/nodeId/version/area/?quality=HIGH&service_type=FILES/</code>
+   */
   @Override
   public String toString() {
     StringBuilder baseUriBuilder = new StringBuilder();
@@ -138,7 +148,9 @@ public class Query {
         : baseUri + '?' + queryParameter;
   }
 
-
+  /**
+   *  Class that implements the builder pattern used to instantiate {@link Query} objects.
+   */
   public static class QueryBuilder {
 
     //Required if using a get
