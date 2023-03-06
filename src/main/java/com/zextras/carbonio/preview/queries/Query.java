@@ -20,7 +20,7 @@ public class Query {
   // Required if using non ce version
   private final String fileOwnerId;
   //Required if using a get
-  private final String nodeId;
+  private final String fileId;
   private final Integer     version;
   private final ServiceType type;
   //Image required always
@@ -37,7 +37,7 @@ public class Query {
 
   private Query(QueryBuilder builder) {
     this.fileOwnerId = builder.fileOwnerId;
-    this.nodeId = builder.nodeId;
+    this.fileId = builder.fileId;
     this.version = builder.version;
     this.type = builder.type;
     this.previewArea = builder.previewArea;
@@ -53,8 +53,8 @@ public class Query {
     return Optional.ofNullable(fileOwnerId);
   }
 
-  public Optional<String> getNodeId() {
-    return Optional.ofNullable(nodeId);
+  public Optional<String> getFileId() {
+    return Optional.ofNullable(fileId);
   }
 
   public Optional<Integer> getVersion() {
@@ -122,7 +122,7 @@ public class Query {
     // Required parameters setup
 
     baseUriBuilder.append('/');
-    getNodeId().ifPresent(n -> baseUriBuilder.append(n).append('/'));
+    getFileId().ifPresent(n -> baseUriBuilder.append(n).append('/'));
     getVersion().ifPresent(v -> baseUriBuilder.append(v).append('/'));
     getPreviewArea().ifPresent(area -> baseUriBuilder.append(area).append('/'));
 
@@ -155,7 +155,7 @@ public class Query {
 
     //Required if using a get
     private String fileOwnerId;
-    private String nodeId;
+    private String fileId;
     private Integer     version;
     private ServiceType type;
     //Image required always
@@ -171,22 +171,22 @@ public class Query {
 
     public QueryBuilder(
       String fileOwnerId,
-      String nodeId,
+      String fileId,
       int version,
       ServiceType type
     ) {
       this.fileOwnerId = fileOwnerId;
-      this.nodeId = nodeId;
+      this.fileId = fileId;
       this.version = version;
       this.type = type;
     }
 
     public QueryBuilder(
-      String nodeId,
+      String fileId,
       int version,
       ServiceType type
     ) {
-      this.nodeId = nodeId;
+      this.fileId = fileId;
       this.version = version;
       this.type = type;
     }
@@ -214,8 +214,8 @@ public class Query {
       return this;
     }
 
-    public QueryBuilder setNodeId(String nodeId) {
-      this.nodeId = nodeId;
+    public QueryBuilder setFileId(String fileId) {
+      this.fileId = fileId;
       return this;
     }
 
