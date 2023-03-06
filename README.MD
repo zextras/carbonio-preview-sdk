@@ -43,13 +43,13 @@ import java.io.InputStream;
 class Test {
 
   public static void main(String[] argv) {
-    nodeId = "fe81dea6-dc90-4468-8aac-e0ec71dbb49d";
+    fileId = "fe81dea6-dc90-4468-8aac-e0ec71dbb49d";
     version = 1;
     accountId = "fe81dea6";
     type = ServiceType.FILES;
     // data initialization
     // GET
-    Query imagePreviewQuery = new Query.QueryBuilder(accountId, nodeId, version, type)
+    Query imagePreviewQuery = new Query.QueryBuilder(accountId, fileId, version, type)
       .setCrop(True)
       .setPreviewArea("300x200")
       .build();
