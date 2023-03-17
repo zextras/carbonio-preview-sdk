@@ -34,34 +34,37 @@ Official sdk for Preview backend service for Zextras Carbonio
 ## Usage 📈
 
 ```java
+import com.zextras.carbonio.preview.queries.BlobResponse;
 import com.zextras.carbonio.preview.queries.Query;
 import com.zextras.carbonio.preview.queries.enums.ServiceType;
-
 import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.FileNotFoundException;
 
 class Test {
 
-  public static void main(String[] argv) {
-    fileId = "fe81dea6-dc90-4468-8aac-e0ec71dbb49d";
-    version = 1;
-    accountId = "fe81dea6";
-    type = ServiceType.FILES;
-    // data initialization
-    // GET
+  public static void main(String[] argv) throws FileNotFoundException {
+    String fileId = "3778a545-55e9-4ba8-a131-6abe1cb08d20";
+    int version = 1;
+    String accountId = "364bfa07-fafe-4f34-9a92-9fa515065c43";
+    ServiceType type = ServiceType.FILES;
+
+    // Data initialization
     Query imagePreviewQuery = new Query.QueryBuilder(accountId, fileId, version, type)
-      .setCrop(True)
+      .setCrop(true)
       .setPreviewArea("300x200")
       .build();
-    PreviewClient prewClient = PreviewClient.atURL("http://127.0.0.1:25566");
-    Try<BlobResponse> result = prewClient.getPreviewOfImage(imagePreviewQuery);
+
+    PreviewClient previewClient = PreviewClient.atURL("http://127.0.0.1:10000");
+
+    // GET
+    previewClient
+      .getPreviewOfImage(imagePreviewQuery)
+      .onSuccess(BlobResponse::getContent);
+
     // POST
-    Query imagePreviewQuery = new Query.QueryBuilder()
-      .setCrop(True)
-      .setPreviewArea("300x200")
-      .build();
-    FileInputStream blob = new File("path");
-    Try<BlobResponse> result = prewClient.postPreviewOfImage(blob, imagePreviewQuery, "filename");
+    FileInputStream blob = new FileInputStream("/tmp/image.jpeg");
+    previewClient.postPreviewOfImage(blob, imagePreviewQuery, "filename")
+      .onSuccess(BlobResponse::getContent);
   }
 }
 ```
