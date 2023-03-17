@@ -338,8 +338,11 @@ public class PreviewClient {
 
   private Try<BlobResponse> sendRequestToPreviewService(HttpRequestBase request) {
 
-    try (CloseableHttpClient httpClient = HttpClients.createMinimal();
-      CloseableHttpResponse response = httpClient.execute(request)) {
+    try {
+      // The response is not consumed in this code block so if the http client is closed then also
+      // the communication with the service will be closed breaking the response stream of the blob
+      CloseableHttpClient httpClient = HttpClients.createMinimal();
+      CloseableHttpResponse response = httpClient.execute(request);
       int statusCode = response.getStatusLine().getStatusCode();
       switch (statusCode) {
         case HttpStatus.SC_OK:
@@ -384,6 +387,4 @@ public class PreviewClient {
       return false;
     }
   }
-
-
 }
