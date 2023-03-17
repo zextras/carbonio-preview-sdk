@@ -63,7 +63,8 @@ class Test {
 
     // POST
     FileInputStream blob = new FileInputStream("/tmp/image.jpeg");
-    previewClient.postPreviewOfImage(blob, imagePreviewQuery, "filename")
+    previewClient
+      .postPreviewOfImage(blob, imagePreviewQuery, "filename")
       .onSuccess(BlobResponse::getContent);
   }
 }
