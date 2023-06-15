@@ -27,6 +27,10 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+/**
+ * An HTTP client that allows to execute HTTP requests to the Preview service. This is the main
+ * class needed to call the Preview APIs.
+ */
 public class PreviewClient {
 
   private final String previewEndpoint;
@@ -35,8 +39,9 @@ public class PreviewClient {
   private final String pdfEndpoint         = "pdf";
   private final String documentEndpoint    = "document";
   private final String healthReadyEndpoint = "/health/ready/";
-  private final String thumbnailPathParam  = "thumbnail";
-  private final String fileOwnerIdHeader   = "FileOwnerId";
+  private final String healthLiveEndpoint = "/health/live/";
+  private final String thumbnailPathParam = "thumbnail";
+  private final String fileOwnerIdHeader  = "FileOwnerId";
 
   // UTILITY
 
@@ -45,10 +50,32 @@ public class PreviewClient {
     this.previewEndpoint = previewURL + "/preview";
   }
 
+
+  /**
+   * Creates a new instance of the {@link PreviewClient}.
+   *
+   * @param url is a {@link String} representing the url used to communicate with the Preview
+   * service. The expected url form must be as follows:
+   * <code>protocol://ip:port</code> (for example <code>http://127.0.0.1:8080</code>).
+   *
+   * @return an instance of the {@link PreviewClient}.
+   */
   public static PreviewClient atURL(String url) {
     return new PreviewClient(url);
   }
 
+  /**
+   * Creates a new instance of the {@link PreviewClient}.
+   *
+   * @param protocol is a {@link String} representing the protocol used to communicate with the
+   * Preview service (for example: <code>http</code>).
+   * @param domain is a {@link String} representing the domain used to communicate with the Preview
+   * service (for example: <code>127.0.0.1</code>).
+   * @param port is an {@link Integer} representing the port used to communicate with the Preview
+   * service.
+   *
+   * @return an instance of the {@link PreviewClient}.
+   */
   public static PreviewClient atURL(
     String protocol,
     String domain,
@@ -75,11 +102,27 @@ public class PreviewClient {
 
   // IMAGE
 
+  /**
+   * Allows to request the processing of an IMAGE to the PREVIEW endpoint using an HTTP GET
+   *
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
+   * ok.
+   */
   public Try<BlobResponse> getPreviewOfImage(Query query) {
     return sendGetToPreviewService(query.toString(), imageEndpoint, query.getFileOwnerId().get());
   }
 
 
+  /**
+   * Allows to request the processing of an IMAGE to the THUMBNAIL endpoint using an HTTP GET
+   *
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
+   * ok.
+   */
   public Try<BlobResponse> getThumbnailOfImage(Query query) {
     return sendGetToPreviewService(
       createPathForThumbnail(query), imageEndpoint, query.getFileOwnerId().get()
@@ -87,6 +130,16 @@ public class PreviewClient {
   }
 
 
+  /**
+   * Allows to send an IMAGE to the PREVIEW endpoint using an HTTP POST and be processed
+   *
+   * @param blob is a {@link InputStream} that contains the image.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
+   * ok.
+   */
   public Try<BlobResponse> postPreviewOfImage(
     InputStream blob,
     Query query,
@@ -95,6 +148,16 @@ public class PreviewClient {
     return sendPostToPreviewService(blob, fileName, query.toString(), imageEndpoint);
   }
 
+  /**
+   * Allows to send an IMAGE to the THUMBNAIL endpoint using an HTTP POST and be processed
+   *
+   * @param blob is a {@link InputStream} that contains the image.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
+   * ok.
+   */
   public Try<BlobResponse> postThumbnailOfImage(
     InputStream blob,
     Query query,
@@ -105,17 +168,43 @@ public class PreviewClient {
 
   //PDF
 
+  /**
+   * Allows to request the processing of a PDF to the PREVIEW endpoint using an HTTP GET
+   *
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the pdf content if everything went
+   * ok.
+   */
   public Try<BlobResponse> getPreviewOfPdf(Query query) {
     return sendGetToPreviewService(query.toString(), pdfEndpoint, query.getFileOwnerId().get());
   }
 
 
+  /**
+   * Allows to request the processing of a PDF to the THUMBNAIL endpoint using an HTTP GET
+   *
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
+   * ok.
+   */
   public Try<BlobResponse> getThumbnailOfPdf(Query query) {
     return sendGetToPreviewService(
       createPathForThumbnail(query), pdfEndpoint, query.getFileOwnerId().get()
     );
   }
 
+  /**
+   * Allows to send a PDF to the THUMBNAIL endpoint using an HTTP POST and be processed
+   *
+   * @param blob is a {@link InputStream} that contains the pdf.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
+   * ok.
+   */
   public Try<BlobResponse> postThumbnailOfPdf(
     InputStream blob,
     Query query,
@@ -124,6 +213,16 @@ public class PreviewClient {
     return sendPostToPreviewService(blob, fileName, createPathForThumbnail(query), pdfEndpoint);
   }
 
+  /**
+   * Allows to send a PDF to the PREVIEW endpoint using an HTTP POST and be processed
+   *
+   * @param blob is a {@link InputStream} that contains the pdf.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the pdf content if everything went
+   * ok.
+   */
   public Try<BlobResponse> postPreviewOfPdf(
     InputStream blob,
     Query query,
@@ -134,19 +233,45 @@ public class PreviewClient {
 
   //DOCUMENT
 
+  /**
+   * Allows to request the processing of a DOCUMENT to the PREVIEW endpoint using an HTTP GET
+   *
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the pdf content if everything went
+   * ok.
+   */
   public Try<BlobResponse> getPreviewOfDocument(Query query) {
     return sendGetToPreviewService(
       query.toString(), documentEndpoint, query.getFileOwnerId().get()
     );
   }
 
-
+  /**
+   * Allows to request the processing of a DOCUMENT to the THUMBNAIL endpoint using an HTTP GET
+   *
+   * @param query is a {@link Query} that specifies the query parameters for the GET.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
+   * ok.
+   */
   public Try<BlobResponse> getThumbnailOfDocument(Query query) {
     return sendGetToPreviewService(
       createPathForThumbnail(query), documentEndpoint, query.getFileOwnerId().get()
     );
   }
 
+
+  /**
+   * Allows to send a DOCUMENT to the THUMBNAIL endpoint using an HTTP POST and be processed
+   *
+   * @param blob is a {@link InputStream} that contains the document.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the image content if everything went
+   * ok.
+   */
   public Try<BlobResponse> postThumbnailOfDocument(
     InputStream blob,
     Query query,
@@ -157,6 +282,16 @@ public class PreviewClient {
     );
   }
 
+  /**
+   * Allows to send a DOCUMENT to the PREVIEW endpoint using an HTTP POST and be processed
+   *
+   * @param blob is a {@link InputStream} that contains the document.
+   * @param query is a {@link Query} that specifies the query parameters
+   * @param fileName is a {@link String} representing the name of the file.
+   *
+   * @return a {@link Try} of {@link BlobResponse} representing the pdf content if everything went
+   * ok.
+   */
   public Try<BlobResponse> postPreviewOfDocument(
     InputStream blob,
     Query query,
@@ -203,8 +338,10 @@ public class PreviewClient {
 
   private Try<BlobResponse> sendRequestToPreviewService(HttpRequestBase request) {
 
-    CloseableHttpClient httpClient = HttpClients.createMinimal();
     try {
+      // The response is not consumed in this code block so if the http client is closed then also
+      // the communication with the service will be closed breaking the response stream of the blob
+      CloseableHttpClient httpClient = HttpClients.createMinimal();
       CloseableHttpResponse response = httpClient.execute(request);
       int statusCode = response.getStatusLine().getStatusCode();
       switch (statusCode) {
@@ -224,19 +361,28 @@ public class PreviewClient {
     }
   }
 
-
   public boolean healthReady() {
-    CloseableHttpClient httpClient = HttpClients.createMinimal();
+    return checkHealthStatus(healthReadyEndpoint);
+  }
 
-    String requestUri = MessageFormat.format(
-      "{0}{1}",
-      previewUrl, healthReadyEndpoint
-    );
-    HttpGet request = new HttpGet(requestUri);
+  public boolean healthLive() {
+    return checkHealthStatus(healthLiveEndpoint);
+  }
 
-    try {
-      CloseableHttpResponse response = httpClient.execute(request);
-      return response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
+  private boolean checkHealthStatus(String endpoint) {
+    try (CloseableHttpClient httpClient = HttpClients.createMinimal()) {
+
+      String requestUri = MessageFormat.format(
+        "{0}{1}",
+        previewUrl, endpoint
+      );
+      HttpGet request = new HttpGet(requestUri);
+
+      try (CloseableHttpResponse response = httpClient.execute(request)) {
+        return response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
+      } catch (IOException exception) {
+        return false;
+      }
     } catch (IOException exception) {
       return false;
     }

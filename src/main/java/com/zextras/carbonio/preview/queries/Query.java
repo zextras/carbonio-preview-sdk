@@ -11,12 +11,16 @@ import com.zextras.carbonio.preview.queries.enums.Shape;
 
 import java.util.Optional;
 
+/**
+ * An object of this class can only be instantiated using the builder pattern using {@link QueryBuilder}.
+ * It is used to specify query parameters for the preview API calls
+ */
 public class Query {
 
   // Required if using non ce version
   private final String fileOwnerId;
   //Required if using a get
-  private final String nodeId;
+  private final String fileId;
   private final Integer     version;
   private final ServiceType type;
   //Image required always
@@ -33,7 +37,7 @@ public class Query {
 
   private Query(QueryBuilder builder) {
     this.fileOwnerId = builder.fileOwnerId;
-    this.nodeId = builder.nodeId;
+    this.fileId = builder.fileId;
     this.version = builder.version;
     this.type = builder.type;
     this.previewArea = builder.previewArea;
@@ -49,8 +53,8 @@ public class Query {
     return Optional.ofNullable(fileOwnerId);
   }
 
-  public Optional<String> getNodeId() {
-    return Optional.ofNullable(nodeId);
+  public Optional<String> getFileId() {
+    return Optional.ofNullable(fileId);
   }
 
   public Optional<Integer> getVersion() {
@@ -105,6 +109,12 @@ public class Query {
     return Optional.ofNullable(firstPage);
   }
 
+  /**
+   * Creates a valid String from the Query object. It formats the various field of the object
+   * Into a valid HTTP url path.
+   * Example of a valid toString for an image query:
+   * <code>/nodeId/version/area/?quality=HIGH&service_type=FILES/</code>
+   */
   @Override
   public String toString() {
     StringBuilder baseUriBuilder = new StringBuilder();
@@ -112,7 +122,7 @@ public class Query {
     // Required parameters setup
 
     baseUriBuilder.append('/');
-    getNodeId().ifPresent(n -> baseUriBuilder.append(n).append('/'));
+    getFileId().ifPresent(n -> baseUriBuilder.append(n).append('/'));
     getVersion().ifPresent(v -> baseUriBuilder.append(v).append('/'));
     getPreviewArea().ifPresent(area -> baseUriBuilder.append(area).append('/'));
 
@@ -138,12 +148,14 @@ public class Query {
         : baseUri + '?' + queryParameter;
   }
 
-
+  /**
+   *  Class that implements the builder pattern used to instantiate {@link Query} objects.
+   */
   public static class QueryBuilder {
 
     //Required if using a get
     private String fileOwnerId;
-    private String nodeId;
+    private String fileId;
     private Integer     version;
     private ServiceType type;
     //Image required always
@@ -159,22 +171,22 @@ public class Query {
 
     public QueryBuilder(
       String fileOwnerId,
-      String nodeId,
+      String fileId,
       int version,
       ServiceType type
     ) {
       this.fileOwnerId = fileOwnerId;
-      this.nodeId = nodeId;
+      this.fileId = fileId;
       this.version = version;
       this.type = type;
     }
 
     public QueryBuilder(
-      String nodeId,
+      String fileId,
       int version,
       ServiceType type
     ) {
-      this.nodeId = nodeId;
+      this.fileId = fileId;
       this.version = version;
       this.type = type;
     }
@@ -202,8 +214,8 @@ public class Query {
       return this;
     }
 
-    public QueryBuilder setNodeId(String nodeId) {
-      this.nodeId = nodeId;
+    public QueryBuilder setFileId(String fileId) {
+      this.fileId = fileId;
       return this;
     }
 
