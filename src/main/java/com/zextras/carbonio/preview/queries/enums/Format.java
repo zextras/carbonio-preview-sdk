@@ -6,5 +6,6 @@ package com.zextras.carbonio.preview.queries.enums;
 
 public enum Format {
   PNG,
-  JPEG
+  JPEG,
+  GIF
 }
