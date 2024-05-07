@@ -21,18 +21,19 @@ public class Query {
   private final String fileOwnerId;
   //Required if using a get
   private final String fileId;
-  private final Integer     version;
+  private final Integer version;
   private final ServiceType type;
   //Image required always
-  private final String      previewArea;
+  private final String previewArea;
   //Image optional
-  private final Shape       shape;
-  private final Quality     quality;
-  private final Format      outputFormat;
-  private final String      crop;
+  private final Shape shape;
+  private final Quality quality;
+  private final Format outputFormat;
+  private final String crop;
   //Pdf optional
-  private final Integer     firstPage;
-  private final Integer     lastPage;
+  private final Integer firstPage;
+  private final Integer lastPage;
+  private final String locale;
 
 
   private Query(QueryBuilder builder) {
@@ -47,6 +48,7 @@ public class Query {
     this.crop = builder.crop;
     this.firstPage = builder.firstPage;
     this.lastPage = builder.lastPage;
+    this.locale = builder.locale;
   }
 
   public Optional<String> getFileOwnerId() {
@@ -63,9 +65,9 @@ public class Query {
 
   public Optional<String> getType() {
     return Optional.ofNullable(
-      type == null
-        ? null
-        : type.toString().toLowerCase()
+        type == null
+            ? null
+            : type.toString().toLowerCase()
     );
   }
 
@@ -75,25 +77,25 @@ public class Query {
 
   public Optional<String> getShape() {
     return Optional.ofNullable(
-      shape == null
-        ? null
-        : shape.toString().toLowerCase()
+        shape == null
+            ? null
+            : shape.toString().toLowerCase()
     );
   }
 
   public Optional<String> getQuality() {
     return Optional.ofNullable(
-      quality == null
-        ? null
-        : quality.toString().toLowerCase()
+        quality == null
+            ? null
+            : quality.toString().toLowerCase()
     );
   }
 
   public Optional<String> getOutputFormat() {
     return Optional.ofNullable(
-      outputFormat == null
-        ? null
-        : outputFormat.toString().toLowerCase()
+        outputFormat == null
+            ? null
+            : outputFormat.toString().toLowerCase()
     );
   }
 
@@ -107,6 +109,10 @@ public class Query {
 
   public Optional<Integer> getFirstPage() {
     return Optional.ofNullable(firstPage);
+  }
+
+  public Optional<String> getLocale() {
+    return Optional.ofNullable(locale);
   }
 
   /**
@@ -136,6 +142,7 @@ public class Query {
     getCrop().ifPresent(c -> queryParameter.append("crop=").append(c).append("&"));
     getFirstPage().ifPresent(f -> queryParameter.append("first_page=").append(f).append("&"));
     getLastPage().ifPresent(l -> queryParameter.append("last_page=").append(l).append("&"));
+    getLocale().ifPresent(lc -> queryParameter.append("locale=").append(lc).append("&"));
 
     getType().ifPresent(t -> queryParameter.append("service_type=").append(t));
     int queryLength = queryParameter.length();
@@ -143,37 +150,38 @@ public class Query {
       queryParameter.deleteCharAt(queryLength - 1);
     }
     return
-      (queryParameter.length() <= 0)
-        ? baseUri
-        : baseUri + '?' + queryParameter;
+        (queryParameter.length() <= 0)
+            ? baseUri
+            : baseUri + '?' + queryParameter;
   }
 
   /**
-   *  Class that implements the builder pattern used to instantiate {@link Query} objects.
+   * Class that implements the builder pattern used to instantiate {@link Query} objects.
    */
   public static class QueryBuilder {
 
     //Required if using a get
     private String fileOwnerId;
     private String fileId;
-    private Integer     version;
+    private Integer version;
     private ServiceType type;
     //Image required always
-    private String      previewArea;
+    private String previewArea;
     //Image optional
-    private Shape       shape;
-    private Quality     quality;
-    private Format      outputFormat;
-    private String      crop;
+    private Shape shape;
+    private Quality quality;
+    private Format outputFormat;
+    private String crop;
     //pdf optional
-    private Integer     firstPage;
-    private Integer     lastPage;
+    private Integer firstPage;
+    private Integer lastPage;
+    private String locale;
 
     public QueryBuilder(
-      String fileOwnerId,
-      String fileId,
-      int version,
-      ServiceType type
+        String fileOwnerId,
+        String fileId,
+        int version,
+        ServiceType type
     ) {
       this.fileOwnerId = fileOwnerId;
       this.fileId = fileId;
@@ -182,9 +190,9 @@ public class Query {
     }
 
     public QueryBuilder(
-      String fileId,
-      int version,
-      ServiceType type
+        String fileId,
+        int version,
+        ServiceType type
     ) {
       this.fileId = fileId;
       this.version = version;
@@ -261,8 +269,8 @@ public class Query {
 
     public QueryBuilder setCrop(boolean crop) {
       this.crop = crop
-        ? "true"
-        : "false";
+          ? "true"
+          : "false";
       return this;
     }
 
@@ -276,9 +284,14 @@ public class Query {
       return this;
     }
 
+    public void setLocale(String locale) {
+      this.locale = locale;
+    }
+
     public Query build() {
       return new Query(this);
     }
+
   }
 
 }
