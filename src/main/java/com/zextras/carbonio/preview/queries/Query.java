@@ -33,6 +33,7 @@ public class Query {
   //Pdf optional
   private final Integer     firstPage;
   private final Integer     lastPage;
+  private final String      locale;
 
 
   private Query(QueryBuilder builder) {
@@ -47,6 +48,7 @@ public class Query {
     this.crop = builder.crop;
     this.firstPage = builder.firstPage;
     this.lastPage = builder.lastPage;
+    this.locale = builder.locale;
   }
 
   public Optional<String> getFileOwnerId() {
@@ -109,6 +111,10 @@ public class Query {
     return Optional.ofNullable(firstPage);
   }
 
+  public Optional<String> getLocale() {
+    return Optional.ofNullable(locale);
+  }
+
   /**
    * Creates a valid String from the Query object. It formats the various field of the object
    * Into a valid HTTP url path.
@@ -136,6 +142,7 @@ public class Query {
     getCrop().ifPresent(c -> queryParameter.append("crop=").append(c).append("&"));
     getFirstPage().ifPresent(f -> queryParameter.append("first_page=").append(f).append("&"));
     getLastPage().ifPresent(l -> queryParameter.append("last_page=").append(l).append("&"));
+    getLocale().ifPresent(lc -> queryParameter.append("locale=").append(lc).append("&"));
 
     getType().ifPresent(t -> queryParameter.append("service_type=").append(t));
     int queryLength = queryParameter.length();
@@ -168,6 +175,7 @@ public class Query {
     //pdf optional
     private Integer     firstPage;
     private Integer     lastPage;
+    private String      locale;
 
     public QueryBuilder(
       String fileOwnerId,
@@ -274,6 +282,10 @@ public class Query {
     public QueryBuilder setLastPage(int lastPage) {
       this.lastPage = lastPage;
       return this;
+    }
+
+    public void setLocale(String locale) {
+      this.locale = locale;
     }
 
     public Query build() {
