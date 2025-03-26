@@ -111,7 +111,7 @@ public class Query {
     return Optional.ofNullable(firstPage);
   }
 
-  public Optional<String> getlangTag() {
+  public Optional<String> getLangTag() {
     return Optional.ofNullable(langTag);
   }
 
@@ -142,7 +142,7 @@ public class Query {
     getCrop().ifPresent(c -> queryParameter.append("crop=").append(c).append("&"));
     getFirstPage().ifPresent(f -> queryParameter.append("first_page=").append(f).append("&"));
     getLastPage().ifPresent(l -> queryParameter.append("last_page=").append(l).append("&"));
-    getlangTag().ifPresent(lc -> queryParameter.append("lang_tag=").append(lc).append("&"));
+    getLangTag().ifPresent(lc -> queryParameter.append("lang_tag=").append(lc).append("&"));
 
     getType().ifPresent(t -> queryParameter.append("service_type=").append(t));
     int queryLength = queryParameter.length();
@@ -284,7 +284,7 @@ public class Query {
       return this;
     }
 
-    public void setlangTag(String langTag) {
+    public void setLangTag(String langTag) {
       this.langTag = langTag;
     }
 
