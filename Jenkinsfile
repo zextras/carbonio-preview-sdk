@@ -13,6 +13,9 @@ pipeline {
         LC_ALL="C.UTF-8"
         jenkins_build="true"
     }
+    parameters {
+        booleanParam defaultValue: false, description: 'Whether to upload the SNAPSHOT artifact', name: 'SNAPSHOT'
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '25'))
         timeout(time: 2, unit: 'HOURS')
