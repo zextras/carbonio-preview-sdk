@@ -30,6 +30,17 @@ pipeline {
                 sh 'mvn -B --settings settings-jenkins.xml package'
             }
         }
+        stage('Publish SNAPSHOT') {
+            when {
+                allOf {
+                    expression { params.SNAPSHOT == true }
+                    expression { env.BRANCH_NAME != 'release' }
+                }
+            }
+            steps {
+                sh 'mvn -B --settings settings-jenkins.xml deploy'
+            }
+        }
         stage('Publish version') {
             when {
                 buildingTag()
