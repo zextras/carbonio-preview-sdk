@@ -13,6 +13,9 @@ pipeline {
         LC_ALL="C.UTF-8"
         jenkins_build="true"
     }
+    parameters {
+        booleanParam defaultValue: false, description: 'Whether to upload the SNAPSHOT artifact', name: 'SNAPSHOT'
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '25'))
         timeout(time: 2, unit: 'HOURS')
@@ -28,6 +31,17 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -B --settings settings-jenkins.xml package'
+            }
+        }
+        stage('Publish SNAPSHOT') {
+            when {
+                allOf {
+                    expression { params.SNAPSHOT == true }
+                    expression { env.BRANCH_NAME != 'release' }
+                }
+            }
+            steps {
+                sh 'mvn -B --settings settings-jenkins.xml deploy'
             }
         }
         stage('Publish version') {
