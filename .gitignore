@@ -18,3 +18,5 @@ target/
 src/main/java/App.java
 test_files
 LICENSES
+
+.vscode/
