@@ -9,9 +9,9 @@ pipeline {
         }
     }
     environment {
-        JAVA_OPTS = '-Dfile.encoding=UTF8'
-        LC_ALL = 'C.UTF-8'
-        jenkins_build = 'true'
+        JAVA_OPTS = "-Dfile.encoding=UTF8"
+        LC_ALL = "C.UTF-8"
+        jenkins_build = "true"
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '25'))
