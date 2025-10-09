@@ -21,10 +21,6 @@ SPDX-License-Identifier: AGPL-3.0-only
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
-                <configuration>
-                    <!-- Use release to ensure proper cross-compilation and module handling for Java 17 -->
-                    <release>17</release>
-                </configuration>
             </plugin>
         </plugins>
     </build>
