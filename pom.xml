@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-only
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.zextras.carbonio.preview</groupId>
   <artifactId>carbonio-preview-sdk</artifactId>
-  <version>1.0.4</version>
+  <version>${revision}${changelist}</version>
   <packaging>jar</packaging>
   <name>carbonio-preview-sdk</name>
 
@@ -20,11 +20,7 @@ SPDX-License-Identifier: AGPL-3.0-only
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-         <version>${revision}${changelist}</version>
-        <configuration>
-          <source>11</source>
-          <target>11</target>
-        </configuration>
+        <version>3.6.1</version>
       </plugin>
     </plugins>
   </build>
@@ -68,8 +64,8 @@ SPDX-License-Identifier: AGPL-3.0-only
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
 
     <apache-httpclient.version>4.5.13</apache-httpclient.version>
     <jackson.version>2.13.1</jackson.version>
