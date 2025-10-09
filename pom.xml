@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-only
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.zextras.carbonio.preview</groupId>
     <artifactId>carbonio-preview-sdk</artifactId>
-    <version>1.0.4</version>
+    <version>${revision}${changelist}</version>
     <packaging>jar</packaging>
     <name>carbonio-preview-sdk</name>
 
@@ -71,6 +71,8 @@ SPDX-License-Identifier: AGPL-3.0-only
         <jackson.version>2.13.1</jackson.version>
         <apache-common.version>2.11.0</apache-common.version>
         <vavr.version>0.10.4</vavr.version>
+        <revision>1.0.5</revision>
+        <changelist>-SNAPSHOT</changelist>
     </properties>
 
 </project>

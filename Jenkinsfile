@@ -9,9 +9,9 @@ pipeline {
         }
     }
     environment {
-        JAVA_OPTS="-Dfile.encoding=UTF8"
-        LC_ALL="C.UTF-8"
-        jenkins_build="true"
+        JAVA_OPTS = '-Dfile.encoding=UTF8'
+        LC_ALL = 'C.UTF-8'
+        jenkins_build = 'true'
     }
     parameters {
         booleanParam defaultValue: false, description: 'Whether to upload the SNAPSHOT artifact', name: 'SNAPSHOT'
@@ -50,11 +50,14 @@ pipeline {
         }
         stage('Publish version') {
             when {
-                buildingTag()
+                anyOf {
+                    branch 'develop'
+                    buildingTag()
+                }
             }
             steps {
                 container('jdk-17') {
-                    sh 'mvn -B --settings settings-jenkins.xml deploy'
+                    sh 'mvn -B --settings settings-jenkins.xml -Dchangelist= deploy'
                 }
             }
         }
