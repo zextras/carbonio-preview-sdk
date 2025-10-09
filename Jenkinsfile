@@ -13,9 +13,6 @@ pipeline {
         LC_ALL = 'C.UTF-8'
         jenkins_build = 'true'
     }
-    parameters {
-        booleanParam defaultValue: false, description: 'Whether to upload the SNAPSHOT artifact', name: 'SNAPSHOT'
-    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '25'))
         timeout(time: 2, unit: 'HOURS')
@@ -38,8 +35,7 @@ pipeline {
         stage('Publish SNAPSHOT') {
             when {
                 allOf {
-                    expression { params.SNAPSHOT == true }
-                    expression { env.BRANCH_NAME != 'release' }
+                    expression { env.BRANCH_NAME != 'develop' }
                 }
             }
             steps {
@@ -51,7 +47,6 @@ pipeline {
         stage('Publish version') {
             when {
                 anyOf {
-                    branch 'develop'
                     buildingTag()
                 }
             }
