@@ -32,23 +32,19 @@ pipeline {
                 }
             }
         }
-        stage('Publish SNAPSHOT') {
+        stage('Publish') {
             when {
                 expression { env.BRANCH_NAME != 'develop' }
             }
             steps {
-                container('jdk-17') {
-                    sh 'mvn -B --settings settings-jenkins.xml deploy'
-                }
-            }
-        }
-        stage('Publish version') {
-            when {
-                buildingTag()
-            }
-            steps {
-                container('jdk-17') {
-                    sh 'mvn -B --settings settings-jenkins.xml -Dchangelist=  deploy'
+                script {
+                    def profile = '-P dev'
+                    if (env.TAG_NAME) {
+                        profile = '-P prod'
+                    }
+                    container('jdk-17') {
+                        sh "mvn -B --settings settings-jenkins.xml ${profile} deploy"
+                    }
                 }
             }
         }
