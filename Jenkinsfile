@@ -33,9 +33,6 @@ pipeline {
             }
         }
         stage('Publish') {
-            when {
-                expression { env.BRANCH_NAME != 'develop' }
-            }
             steps {
                 script {
                     def profile = '-P dev'
