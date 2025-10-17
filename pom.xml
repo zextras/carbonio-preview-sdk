@@ -72,7 +72,24 @@ SPDX-License-Identifier: AGPL-3.0-only
     <apache-common.version>2.11.0</apache-common.version>
     <vavr.version>0.10.4</vavr.version>
     <revision>1.0.5</revision>
-    <changelist>-SNAPSHOT</changelist>
   </properties>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <changelist>-SNAPSHOT</changelist>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <changelist></changelist>
+      </properties>
+    </profile>
+  </profiles>
 
 </project>
