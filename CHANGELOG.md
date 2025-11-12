@@ -1,0 +1,34 @@
+## [1.0.5](https://github.com/zextras/carbonio-preview-sdk/compare/v1.0.4...v1.0.5) (2025-10-10)
+## [1.0.4](https://github.com/zextras/carbonio-preview-sdk/compare/v1.0.3...v1.0.4) (2025-03-27)
+
+### Bug Fixes
+
+* date format is broken in files preview ([#14](https://github.com/zextras/carbonio-preview-sdk/issues/14)) ([957d8df](https://github.com/zextras/carbonio-preview-sdk/commit/957d8df63375d42d9eae56c3f0de666cef88049f))
+## [1.0.3](https://github.com/zextras/carbonio-preview-sdk/compare/v1.0.2...v1.0.3) (2024-05-21)
+
+### Features
+
+* add locale to query builder ([#12](https://github.com/zextras/carbonio-preview-sdk/issues/12)) ([650cc24](https://github.com/zextras/carbonio-preview-sdk/commit/650cc24fe9708c3a6d20c95e5161bde42fc41692))
+## [1.0.2](https://github.com/zextras/carbonio-preview-sdk/compare/ed0fb5e7ced207774ca360be3e61dee73c2754c6...v1.0.2) (2023-07-03)
+
+### ⚠ BREAKING CHANGES
+
+* PREV-103 - Rename nodeId to fileId (#6)
+* rename sdk, clean up code (#2)
+
+### Features
+
+* Add GIF as output format ([#10](https://github.com/zextras/carbonio-preview-sdk/issues/10)) ([4a45759](https://github.com/zextras/carbonio-preview-sdk/commit/4a457598b1e005e840ee7674a0701e062c4caf55))
+* carbonio release ([ed0fb5e](https://github.com/zextras/carbonio-preview-sdk/commit/ed0fb5e7ced207774ca360be3e61dee73c2754c6))
+* PREV-48 document's preview and thumbnail ([#3](https://github.com/zextras/carbonio-preview-sdk/issues/3)) ([7f469bd](https://github.com/zextras/carbonio-preview-sdk/commit/7f469bd1e6aaa55f5e4b85792286dc2cfec7cb82))
+* PREV-62 - Add health live method ([#5](https://github.com/zextras/carbonio-preview-sdk/issues/5)) ([c9ce1bb](https://github.com/zextras/carbonio-preview-sdk/commit/c9ce1bb7c9c28ca949b08c93bed2119f68437ffb))
+
+### Bug Fixes
+
+* PREV-105 - Remove try-with-resources usage ([#8](https://github.com/zextras/carbonio-preview-sdk/issues/8)) ([738a392](https://github.com/zextras/carbonio-preview-sdk/commit/738a3929568dd108488cab81949c6b3eed39d63e))
+* PREV-49 jenkins pipeline not deploying ([91a114b](https://github.com/zextras/carbonio-preview-sdk/commit/91a114bfa680bf1cf893ddb99bcabca72325325f))
+
+### Miscellaneous Chores
+
+* PREV-103 - Rename nodeId to fileId ([#6](https://github.com/zextras/carbonio-preview-sdk/issues/6)) ([1604da9](https://github.com/zextras/carbonio-preview-sdk/commit/1604da9b9f7f985a585b005b21176a05b559e9d5))
+* rename sdk, clean up code ([#2](https://github.com/zextras/carbonio-preview-sdk/issues/2)) ([ba6f5e2](https://github.com/zextras/carbonio-preview-sdk/commit/ba6f5e28618a3f8d2e3861c313f71f516e55710a))
