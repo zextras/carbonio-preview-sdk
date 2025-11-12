@@ -71,7 +71,7 @@ SPDX-License-Identifier: AGPL-3.0-only
     <jackson.version>2.13.1</jackson.version>
     <apache-common.version>2.11.0</apache-common.version>
     <vavr.version>0.10.4</vavr.version>
-    <revision>1.0.6</revision>
+    <revision>2.0.0</revision>
   </properties>
 
   <profiles>

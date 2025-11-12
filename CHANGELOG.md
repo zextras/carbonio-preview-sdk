@@ -1,3 +1,13 @@
+## [2.0.0](https://github.com/zextras/carbonio-preview-sdk/compare/v1.0.5...v2.0.0) (2025-11-12)
+
+### ⚠ BREAKING CHANGES
+
+* automated releases (#20)
+
+### Miscellaneous Chores
+
+* automated releases ([#20](https://github.com/zextras/carbonio-preview-sdk/issues/20)) ([29e0980](https://github.com/zextras/carbonio-preview-sdk/commit/29e09805d0e0e806b834d8c2b5b98f1377e76198))
+
 ## [1.0.5](https://github.com/zextras/carbonio-preview-sdk/compare/v1.0.4...v1.0.5) (2025-10-10)
 ## [1.0.4](https://github.com/zextras/carbonio-preview-sdk/compare/v1.0.3...v1.0.4) (2025-03-27)
 
