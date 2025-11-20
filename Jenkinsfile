@@ -61,17 +61,12 @@ pipeline {
                 }
             }
         }
-        stage('Setup') {
-            steps {
-                withCredentials([file(credentialsId: 'jenkins-maven-settings.xml', variable: 'SETTINGS_PATH')]) {
-                    sh 'cp $SETTINGS_PATH settings-jenkins.xml'
-                }
-            }
-        }
         stage('Build') {
             steps {
                 container('jdk-17') {
-                    sh 'mvn -B --settings settings-jenkins.xml package'
+                    withCredentials([file(credentialsId: 'jenkins-maven-settings.xml', variable: 'SETTINGS_PATH')]) {
+                        sh 'mvn -B -s $SETTINGS_PATH package'
+                    }
                 }
             }
         }
@@ -81,7 +76,9 @@ pipeline {
             }
             steps {
                 container('jdk-17') {
-                    sh 'mvn -B --settings settings-jenkins.xml verify'
+                    withCredentials([file(credentialsId: 'jenkins-maven-settings.xml', variable: 'SETTINGS_PATH')]) {
+                        sh 'mvn -B -s $SETTINGS_PATH verify'
+                    }
                 }
             }
         }
@@ -91,7 +88,9 @@ pipeline {
             }
             steps {
                 container('jdk-17') {
-                    sh 'mvn -B --settings settings-jenkins.xml verify -P generate-jacoco-full-report'
+                    withCredentials([file(credentialsId: 'jenkins-maven-settings.xml', variable: 'SETTINGS_PATH')]) {
+                        sh 'mvn -B -s $SETTINGS_PATH verify -P generate-jacoco-full-report'
+                    }
                     recordCoverage(tools: [[parser: 'JACOCO']], sourceCodeRetention: 'MODIFIED')
                 }
             }
@@ -148,7 +147,9 @@ pipeline {
                         profile = '-P prod'
                     }
                     container('jdk-17') {
-                        sh "mvn -B --settings settings-jenkins.xml ${profile} deploy"
+                        withCredentials([file(credentialsId: 'jenkins-maven-settings.xml', variable: 'SETTINGS_PATH')]) {
+                            sh "mvn -B -s \$SETTINGS_PATH ${profile} deploy"
+                        }
                     }
                 }
             }
