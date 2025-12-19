@@ -49,7 +49,7 @@ SPDX-License-Identifier: AGPL-3.0-only
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpmime</artifactId>
-      <version>4.3.1</version>
+      <version>4.5.14</version>
     </dependency>
 
   </dependencies>
@@ -67,7 +67,7 @@ SPDX-License-Identifier: AGPL-3.0-only
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
 
-    <apache-httpclient.version>4.5.13</apache-httpclient.version>
+    <apache-httpclient.version>4.5.14</apache-httpclient.version>
     <jackson.version>2.13.1</jackson.version>
     <apache-common.version>2.11.0</apache-common.version>
     <vavr.version>0.11.0</vavr.version>
