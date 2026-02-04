@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/zextras/carbonio-preview-sdk/compare/v2.0.0...v2.0.1) (2026-02-04)
+
+### Bug Fixes
+
+* **deps:** update apache http components to v4.5.14 ([#27](https://github.com/zextras/carbonio-preview-sdk/issues/27)) ([ea845c6](https://github.com/zextras/carbonio-preview-sdk/commit/ea845c64d23918086c591132295f2abe1d127b17))
+* **deps:** update dependency io.vavr:vavr to v0.11.0 ([#28](https://github.com/zextras/carbonio-preview-sdk/issues/28)) ([9e9297b](https://github.com/zextras/carbonio-preview-sdk/commit/9e9297b7ac91198cd0e01ec7316ce16d18056fb9))
+
 ## [2.0.0](https://github.com/zextras/carbonio-preview-sdk/compare/v1.0.5...v2.0.0) (2025-11-12)
 
 ### ⚠ BREAKING CHANGES
