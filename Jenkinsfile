@@ -14,5 +14,4 @@ library(
 dt3_pipeline(
     repoName: 'carbonio-preview-sdk',
     mavenPublish: ['.'],
-    gitleaks: true,
 )
