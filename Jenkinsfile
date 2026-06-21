@@ -12,7 +12,7 @@ library(
 )
 
 dt3_pipeline(
-    projectType: 'CE',
     repoName: 'carbonio-preview-sdk',
     mavenPublish: ['.'],
+    reuse: [projectType: 'CE'],
 )
