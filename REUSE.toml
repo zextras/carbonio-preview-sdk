@@ -1,0 +1,22 @@
+version = 1
+SPDX-PackageName = "carbonio-preview-sdk"
+SPDX-PackageSupplier = "Zextras <https://www.zextras.com>"
+SPDX-PackageDownloadLocation = "https://github.com/zextras/carbonio-preview-sdk"
+
+[[annotations]]
+path = ".github/CODEOWNERS"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022 Zextras <https://www.zextras.com>"
+SPDX-License-Identifier = "AGPL-3.0-only"
+
+[[annotations]]
+path = [".github/renovate.json", ".releaserc.json"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022 Zextras <https://www.zextras.com>"
+SPDX-License-Identifier = "AGPL-3.0-only"
+
+[[annotations]]
+path = "CHANGELOG.md"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022 Zextras <https://www.zextras.com>"
+SPDX-License-Identifier = "AGPL-3.0-only"
