@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/zextras/carbonio-preview-sdk/compare/v2.0.1...v2.1.0) (2026-06-23)
+
+### Features
+
+* migrate to dt3-pipeline ([#44](https://github.com/zextras/carbonio-preview-sdk/issues/44)) ([d1559ea](https://github.com/zextras/carbonio-preview-sdk/commit/d1559ea6df9f07607d7f363bb841e431bdb28abf))
+
 ## [2.0.1](https://github.com/zextras/carbonio-preview-sdk/compare/v2.0.0...v2.0.1) (2026-02-04)
 
 ### Bug Fixes
