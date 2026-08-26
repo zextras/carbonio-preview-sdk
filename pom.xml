@@ -115,7 +115,7 @@ SPDX-License-Identifier: AGPL-3.0-only
     <apache-common.version>2.11.0</apache-common.version>
     <vavr.version>0.11.0</vavr.version>
     <sonar.version>5.5.0.6356</sonar.version>
-    <revision>2.1.1</revision>
+    <revision>2.1.2</revision>
   </properties>
 
   <profiles>
