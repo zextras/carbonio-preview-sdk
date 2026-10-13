@@ -1,3 +1,5 @@
+## [2.1.9](https://github.com/zextras/carbonio-preview-sdk/compare/v2.1.8...v2.1.9) (2026-10-13)
+
 ## [2.1.8](https://github.com/zextras/carbonio-preview-sdk/compare/v2.1.7...v2.1.8) (2026-09-25)
 
 ## [2.1.7](https://github.com/zextras/carbonio-preview-sdk/compare/v2.1.6...v2.1.7) (2026-09-21)
